@@ -16,7 +16,7 @@ class VideoManager:
             cv2.rectangle(self.frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
     
     def show_video(self):
-        cv2.imshow("Received Image", self.frame)
+        cv2.imshow("Stream", self.frame)
         if cv2.waitKey(25) & 0xFF == ord('q'):
             return 1
         else: 

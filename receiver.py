@@ -4,11 +4,13 @@ import numpy as np
 import pickle
 
 HOST = "192.168.68.84"  # Listen on localhost
-PORT = 5005         # Port to listen on
+PORT = 5006         # Port to listen on
 
 OP_FRAME=0x06
 OP_WAIT=0x07
-OP_END=0x08
+
+OP_CONTINUE=0x08
+OP_END=0x09
 OP_ERROR=0x00
 
 class CommunicationManager:
@@ -40,6 +42,13 @@ class CommunicationManager:
             return 0,
         else: 
             return 0,
+
+    def send_end(self):
+        self.sock.sendall(struct.pack("!H", OP_END))
+
+    def send_continue(self):
+        self.sock.sendall(struct.pack("!H", OP_CONTINUE))
+
 
     def _listen_for_frame(self):
         img_size_data = self.sock.recv(4)
